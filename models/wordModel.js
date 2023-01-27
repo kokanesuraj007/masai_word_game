@@ -1,12 +1,10 @@
-const mongoose=require("mongoose")
+const { Schema, model } = require("mongoose");
 
-const pointSchema=new mongoose.Schema({
-    name:{type:String,required:true},
-    level:{type:String,enum:['Hgh',"Medium",'Low']},
-    score:{type:Number,default:0}
-
+const gameSchema = new Schema({
+    name: { type: String, require: true },
+    difficultyLevel: { type: String, require: true }
 })
 
-const PointModel=mongoose.model("user",pointSchema)
+const gameModel = model("game", gameSchema);
 
-module.exports={PointModel}
+module.exports = gameModel;

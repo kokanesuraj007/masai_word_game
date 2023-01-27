@@ -1,7 +1,7 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-require("dotenv").config()
+const connect = async () => {
+    return mongoose.connect(process.env.URL);
+}
 
-const connection = mongoose.connect(process.env.URL)
-mongoose.set('strictQuery', false)
-module.exports={connection}
+module.exports = connect;

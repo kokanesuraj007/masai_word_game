@@ -1,33 +1,23 @@
-const express = require("express")
-const cors = require("cors")
-const {connection} = require("./config/db")
-require("dotenv").config()
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const connect = require("./config/db");
+
+const gameRoute = require("./routes/game");
+
+const PORT = process.env.PORT;
 
 const app = express();
-const PORT=process.env.PORT || 8000
-app.use(cors())
 
-app.use(express.json())
+app.use(express.json());
+app.use(cors());
+app.use("/game", gameRoute);
 
-
-app.get("/", (req, res) => {
-    res.send("Hello")
+app.get("/", async (req, res) => {
+    res.send("Welcome to our backend");
 })
-
-
-const { pointRouter } = require("./routes/point.route");
-app.use("/",pointRouter)
-
 
 app.listen(PORT, async () => {
-    try{
-        await connection
-        console.log("Connection to DB successfully")
-    }
-    catch(err){
-        console.log(err)
-        console.log("Error connecting to DB")
-    }
-    console.log(`Listening on PORT ${PORT}`)
+    await connect();
+    console.log(`Listening on http://localhost:${PORT}`);
 })
-
