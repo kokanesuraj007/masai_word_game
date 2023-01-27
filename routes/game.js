@@ -1,5 +1,5 @@
 const express = require("express");
-const gameModel = require("../models/game");
+const gameModel = require("../models/wordModel");
 const gameRoute = express.Router();
 
 gameRoute.get("/", async (req, res) => {
